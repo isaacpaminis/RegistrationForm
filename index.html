@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RegistrationForm</title>
+</head>
+
+<body>
+
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+            top: 100px;
+            padding: 20px;
+            color: blue;
+            font-size: 20px;
+            
+
+        }
+
+        label {
+            display: inline-block;
+            width: 90px;
+        }
+
+        input {
+            width: 220px;
+            padding: 5px;
+
+
+        }
+
+        .errormessage {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        
+        
+        
+    </style>
+    <div class="container">
+        <h1 >Registration Form</h1>
+
+        <form>
+
+            <label>Name</label> <input type="text" placeholder="Enter your name" id="inputboxname"><br>
+            <div class="errormessage" id="nameerror">Name cannot be empty</div><br>
+            <label>Email</label> <input type="email" placeholder="Eg:hello@gmail.com" id="inputboxemail"><br>
+            <div class="errormessage" id="emailerror">enter a valid Email id</div><br>
+            <label>Password</label><input type="password" placeholder="Minimum length of 6 characters"
+                id="inputboxpass"><br>
+            <div class="errormessage" id="passerror">Password must be atleast 6 characters id</div><br>
+            <button type="button" id="btn" style="background-color: blue
+            ;color: blanchedalmond; margin-left: 120px;padding: 5px; border-radius: 10px;">Submit</button>
+        </form>
+        <h2 id="successmsg" style="color:green; display:none;">
+            You have been Registered !!!
+        </h2>
+    </div>
+    <script>
+        //Selecting Ids
+
+        var inputboxname = document.getElementById("inputboxname")
+        var inputboxemail = document.getElementById("inputboxemail")
+        var inputboxpass = document.getElementById("inputboxpass")
+        var errormessage = document.querySelector(".errormessage")
+        var btn = document.getElementById("btn")
+        var nameerror = document.getElementById("nameerror")
+        var emailerror = document.getElementById("emailerror")
+        var passerror = document.getElementById("passerror")
+        var successmsg = document.getElementById("successmsg")
+
+        btn.addEventListener("click", function () {
+
+            //Name validation
+            if (inputboxname.value == "") {
+                nameerror.style.display = "block"
+            }
+            else {
+                nameerror.style.display = "none"
+            }
+
+            //Email validation
+            
+            if (inputboxemail.checkValidity()) {
+                emailerror.style.display = "none"
+            }
+            else {
+                emailerror.style.display = "block"
+            }
+
+            //Password validation
+            if (inputboxpass.value.length < 6) {
+                passerror.style.display = "block"
+            }
+            else {
+                passerror.style.display = "none"
+            }
+
+       //Successmessage
+var namevalid = inputboxname.value != ""
+var emailvalid = inputboxemail.checkValidity()
+var passvalid = inputboxpass.value.length >= 6
+
+if(namevalid && emailvalid && passvalid){
+    successmsg.style.display = "block"
+}
+else{
+    successmsg.style.display = "none"
+}
+    }
+)
+
+    </script>
+</body>
+
+</html>
