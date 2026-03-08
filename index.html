@@ -20,8 +20,6 @@
             padding: 20px;
             color: blue;
             font-size: 20px;
-            
-
         }
 
         label {
@@ -32,8 +30,6 @@
         input {
             width: 220px;
             padding: 5px;
-
-
         }
 
         .errormessage {
@@ -42,13 +38,9 @@
             margin-top: 5px;
             display: none;
         }
-
-        
-        
-        
     </style>
     <div class="container">
-        <h1 >Registration Form</h1>
+        <h1>Registration Form</h1>
 
         <form>
 
@@ -59,8 +51,7 @@
             <label>Password</label><input type="password" placeholder="Minimum length of 6 characters"
                 id="inputboxpass"><br>
             <div class="errormessage" id="passerror">Password must be atleast 6 characters id</div><br>
-            <button type="button" id="btn" style="background-color: blue
-            ;color: blanchedalmond; margin-left: 120px;padding: 5px; border-radius: 10px;">Submit</button>
+            <button type="button" id="btn" style=" background-color:blue;color: white; margin-left: 120px;padding: 5px; border-radius: 10px; cursor: pointer;">Submit</button>
         </form>
         <h2 id="successmsg" style="color:green; display:none;">
             You have been Registered !!!
@@ -72,25 +63,49 @@
         var inputboxname = document.getElementById("inputboxname")
         var inputboxemail = document.getElementById("inputboxemail")
         var inputboxpass = document.getElementById("inputboxpass")
-        var errormessage = document.querySelector(".errormessage")
-        var btn = document.getElementById("btn")
+
         var nameerror = document.getElementById("nameerror")
         var emailerror = document.getElementById("emailerror")
         var passerror = document.getElementById("passerror")
+
+        var btn = document.getElementById("btn")
         var successmsg = document.getElementById("successmsg")
 
-        btn.addEventListener("click", function () {
+        //Button Disabled
+        btn.disabled = true
 
-            //Name validation
-            if (inputboxname.value == "") {
+        function checkForm() {
+
+            if (inputboxname.value == "" || !inputboxemail.checkValidity() || inputboxpass.value.length < 6) {
+                btn.disabled = true
+            }
+            else {
+                btn.disabled = false
+            }
+
+        }
+
+
+        //Name validation
+
+        inputboxname.addEventListener("input", function () {
+
+            if (inputboxname.value.trim() == "") {
                 nameerror.style.display = "block"
             }
             else {
                 nameerror.style.display = "none"
             }
 
-            //Email validation
-            
+            checkForm()
+
+        })
+
+
+        //Email validation
+
+        inputboxemail.addEventListener("input", function () {
+
             if (inputboxemail.checkValidity()) {
                 emailerror.style.display = "none"
             }
@@ -98,7 +113,14 @@
                 emailerror.style.display = "block"
             }
 
-            //Password validation
+            checkForm()
+
+        })
+
+
+        //Password validation
+        inputboxpass.addEventListener("input", function () {
+
             if (inputboxpass.value.length < 6) {
                 passerror.style.display = "block"
             }
@@ -106,20 +128,16 @@
                 passerror.style.display = "none"
             }
 
-       //Successmessage
-var namevalid = inputboxname.value != ""
-var emailvalid = inputboxemail.checkValidity()
-var passvalid = inputboxpass.value.length >= 6
+            checkForm()
 
-if(namevalid && emailvalid && passvalid){
-    successmsg.style.display = "block"
-}
-else{
-    successmsg.style.display = "none"
-}
-    }
-)
+        })
 
+
+        //Submit
+        
+        btn.addEventListener("click", function () {
+            successmsg.style.display = "block"
+        })
     </script>
 </body>
 
